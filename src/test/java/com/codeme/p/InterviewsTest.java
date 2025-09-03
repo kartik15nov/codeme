@@ -1,4 +1,4 @@
-package com.codeme.practice;
+package com.codeme.p;
 
 import java.util.ArrayList;
 import java.util.Comparator;

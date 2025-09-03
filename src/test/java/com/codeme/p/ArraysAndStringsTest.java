@@ -1,4 +1,4 @@
-package com.codeme.practice;
+package com.codeme.p;
 
 import org.junit.jupiter.api.Test;
 
