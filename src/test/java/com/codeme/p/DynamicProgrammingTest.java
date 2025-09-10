@@ -1,5 +1,8 @@
 package com.codeme.p;
 
+import static java.lang.Math.max;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+
 import org.junit.jupiter.api.Test;
 
 class DynamicProgrammingTest {
@@ -47,5 +50,52 @@ class DynamicProgrammingTest {
 
     System.out.println();
     return optimalSolutions[n];
+  }
+
+  @Test
+  public void stockBuySell() {
+    assertEquals(5, buySell_brute_force(new int[]{7, 1, 5, 3, 6, 4}));
+    assertEquals(0, buySell_brute_force(new int[]{7, 6, 4, 3, 1}));
+
+    assertEquals(5, buySell_dp(new int[]{7, 1, 5, 3, 6, 4}));
+    assertEquals(0, buySell_dp(new int[]{7, 6, 4, 3, 1}));
+  }
+
+  private int buySell_brute_force(int[] price) {
+    int max_profit = Integer.MIN_VALUE;
+
+    // Check for each price, what is the max profit with other price in the future.
+    // At the end the max_profit will be returned
+    for (int i = 0; i < price.length - 1; i++) {
+      for (int j = i; j < price.length; j++) {
+        int profit = price[j] - price[i];
+        if (profit > max_profit) {
+          max_profit = profit;
+        }
+      }
+    }
+
+    return max(max_profit, 0);
+  }
+
+  private int buySell_dp(int[] prices) {
+    int min_price = prices[0];
+    int max_profit = 0;
+
+    // Here in DP we are maintaining the state of minimum price everytime we traverse through new price.
+    // So that makes loop move forward only and get the solution in O(n)
+
+    //This question is simple, cz the ask is to find the best buy->sell/max profit considering one transaction. i.e. one time buy, one time sell.
+    for (int j : prices) {
+      if (j < min_price) {
+        min_price = j;
+      } else {
+        int profit = j - min_price;
+        if (profit > max_profit) {
+          max_profit = profit;
+        }
+      }
+    }
+    return max_profit;
   }
 }
