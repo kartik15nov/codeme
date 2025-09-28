@@ -31,7 +31,7 @@ public class Mimecast {
     }
 
     return map.entrySet().stream()
-        .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
+        .sorted(Entry.comparingByValue(Comparator.reverseOrder()))
         .map(Entry::getKey)
         .limit(k)
         .toList();
