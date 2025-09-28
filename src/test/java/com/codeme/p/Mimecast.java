@@ -22,12 +22,7 @@ public class Mimecast {
     Map<Integer, Integer> map = new HashMap<>();
 
     for (int j : arr) {
-      if (map.containsKey(j)) {
-        int count = map.get(j) + 1;
-        map.put(j, count);
-      } else {
-        map.put(j, 1);
-      }
+      map.put(j, map.getOrDefault(j, 0) + 1);
     }
 
     return map.entrySet().stream()
