@@ -1,6 +1,6 @@
 package com.codeme.p;
 
-import java.util.ArrayList;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,15 +30,11 @@ public class Mimecast {
       }
     }
 
-    List<Integer> res = new ArrayList<>();
-    List<Integer> values = map.entrySet().stream()
-        .sorted((o1, o2) -> -o1.getValue().compareTo(o2.getValue()))
+    return map.entrySet().stream()
+        .sorted(Map.Entry.comparingByValue(Comparator.reverseOrder()))
         .map(Entry::getKey)
+        .limit(k)
         .toList();
-    for (int i = 0; i < k; i++) {
-      res.add(values.get(i));
-    }
-    return res;
   }
 
   int[] getTopK1(int[] arr, int k) {
