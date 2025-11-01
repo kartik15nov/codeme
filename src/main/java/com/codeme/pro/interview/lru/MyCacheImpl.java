@@ -1,4 +1,4 @@
-package com.codeme.lru;
+package com.codeme.pro.interview.lru;
 
 import java.util.HashMap;
 import java.util.LinkedList;

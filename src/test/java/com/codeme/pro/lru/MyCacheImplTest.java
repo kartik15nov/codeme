@@ -1,8 +1,9 @@
-package com.codeme.lru;
+package com.codeme.pro.lru;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 
+import com.codeme.pro.interview.lru.MyCacheImpl;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 

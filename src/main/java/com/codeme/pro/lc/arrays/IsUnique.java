@@ -1,17 +1,14 @@
-package com.codeme.p;
+package com.codeme.pro.lc.arrays;
 
-import org.junit.jupiter.api.Test;
+public class IsUnique {
 
-class ArraysAndStringsTest {
-
-  @Test
-  public void isUnique() {
+  public static void main(String[] args) {
     System.out.println(isUniqueChars("Hello"));
     System.out.println(isUniqueChars("Hi"));
     System.out.println(isUniqueChars("Abeda"));
   }
 
-  boolean isUniqueChars(String str) {
+  public static boolean isUniqueChars(String str) {
     if (str.length() > 128) {
       return false;
     }

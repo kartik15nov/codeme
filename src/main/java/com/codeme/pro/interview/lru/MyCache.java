@@ -1,4 +1,4 @@
-package com.codeme.lru;
+package com.codeme.pro.interview.lru;
 
 import java.util.Collections;
 import java.util.Map;

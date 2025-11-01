@@ -1,15 +1,13 @@
-package com.codeme.p;
+package com.codeme.pro.interview.ge;
 
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
-import org.junit.jupiter.api.Test;
 
-class InterviewsTest {
+public class GePatients {
 
-  @Test
-  public void test() {
+  public static void main(String[] args) {
     System.out.println("Hello");
 
 //    Patient p1 = new Patient();
