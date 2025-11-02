@@ -1,4 +1,4 @@
-package com.codeme.pro.lc.arrays;
+package com.codeme.pro.study.arrays;
 
 public class IsUnique {
 

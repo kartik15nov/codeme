@@ -1,4 +1,4 @@
-package com.codeme.pro.lc.arrays;
+package com.codeme.pro.study.arrays;
 
 import java.util.Arrays;
 
@@ -18,7 +18,6 @@ public class RemoveElement {
         nums[k++] = nums[i];
       }
     }
-    System.out.println(k + " " + Arrays.toString(nums));
     return nums;
   }
 
