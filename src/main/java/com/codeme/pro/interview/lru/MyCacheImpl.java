@@ -19,57 +19,38 @@ public class MyCacheImpl<K, V> implements MyCache<K, V> {
 
   @Override
   public synchronized V get(K key) {
-    if (map.containsKey(key)) {
-      lru.remove(key);
-      lru.add(key);
-      return map.get(key);
+    if (!map.containsKey(key)) {
+      return null;
     }
-    return null;
+
+    lru.remove(key);
+    lru.addFirst(key);
+    return map.get(key);
   }
 
   @Override
   public synchronized boolean put(K key, V value) {
     if (map.containsKey(key)) {
-      V oldValue = map.get(key);
-
-      if (oldValue != null && oldValue.equals(value)) {
-        // Update the LRU
-        lru.remove(key);
-        lru.add(key);
-
-        return false;
-      }
-
-      // Write to cache
-      map.put(key, value);
-
-      // Update the LRU
+      //Move to Head
       lru.remove(key);
-      lru.add(key);
+      lru.addFirst(key);
 
+      //Update the new value
+      map.put(key, value);
       return true;
-    } else {
-      if (map.size() >= capacity) {
-        // Evict the long-lived item
-        K itemToEvict = lru.getFirst();
-        map.remove(itemToEvict);
-        lru.remove(itemToEvict);
-
-        // write the key, value to cache
-        map.put(key, value);
-
-        // Add the new item to the lru list
-        lru.add(key);
-      } else {
-        // write the key, value to cache
-        map.put(key, value);
-
-        // Add the new item to the lru list
-        lru.remove(key);
-        lru.add(key);
-      }
     }
-    return true;
+
+    V oldValue = map.get(key);
+    if (map.size() == capacity) {
+      // Remove the long-lived object from LRU as well as from map
+      map.remove(lru.removeLast());
+    }
+
+    // Add the new object to the cache, and add first in the LRU
+    map.put(key, value);
+    lru.addFirst(key);
+
+    return value.equals(oldValue);
   }
 
   @Override

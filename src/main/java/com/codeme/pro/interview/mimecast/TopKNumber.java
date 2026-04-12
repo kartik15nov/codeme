@@ -1,10 +1,12 @@
 package com.codeme.pro.interview.mimecast;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
+import java.util.PriorityQueue;
 
 public class TopKNumber {
 
@@ -30,28 +32,20 @@ public class TopKNumber {
         .toArray();
   }
 
-  public static int[] getTopK1(int[] arr, int k) {
+  public static ArrayList<Integer> getTopKPriorityQueue(int[] nums, int k) {
 
-    int max_count = Integer.MIN_VALUE;
-    int lastPosition = 0;
-    //int[] arr = new int[]{-1, 0, 2,2,2,2,3, 3, 3,3,3,, 1, 1, 2};
+    PriorityQueue<Integer> minHeap = new PriorityQueue<>();
 
-    int[] res = new int[k];
-    for (int i = 0; i < arr.length; i++) {
-      int j = 0;
-      int currCount = 0;
-      if (arr[i] != arr[j]) {
-        currCount = 1;
-        j = i;
-      } else {
-        currCount++;
-        if (currCount > max_count) {
-          max_count = currCount;
+    for (int num : nums) {
+      minHeap.offer(num);
 
-        }
-
+      // Keep only K elements in the heap
+      if (minHeap.size() > k) {
+        minHeap.poll(); // removes smallest
       }
     }
-    return res;
+
+    // Heap now has K largest elements
+    return new ArrayList<>(minHeap);
   }
 }
